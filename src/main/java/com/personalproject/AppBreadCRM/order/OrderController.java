@@ -17,6 +17,10 @@ public class OrderController {
     @GetMapping(value = "/customers/{customerId}/orders")
     public List<Order> readAllOrders(@PathVariable long customerId){
          return orderService.readAllIssues(customerId);    }
+
+    @GetMapping(value = "/orders")
+    public Iterable<Order> readAllOrders(){
+        return orderService.readAllIssues();    }
     @GetMapping(value = "/customers/{customerId}/orders/{id}")
     public Order readOneOrder(@PathVariable long id){
         return orderService.readOneOrder(id);

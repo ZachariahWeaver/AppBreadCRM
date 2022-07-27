@@ -16,6 +16,9 @@ public class IssueService {
     public List<Issue> readAllIssues(long orderId){
         return issueRepository.findByOrderId(orderId);
     }
+    public Iterable<Issue> readAllIssues(){
+        return issueRepository.findAll();
+    }
     public Issue readOneIssue(long id){
         return getIssueById(id);
     }

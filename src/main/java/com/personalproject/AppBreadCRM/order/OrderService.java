@@ -15,7 +15,11 @@ public class OrderService {
 
     public List<Order> readAllIssues(long customerId){
         return orderRepository.findByCustomerId(customerId);
-    }    public Order readOneOrder(long id){
+    }
+    public Iterable<Order> readAllIssues(){
+        return orderRepository.findAll();
+    }
+    public Order readOneOrder(long id){
         return getOrderById(id);
     }
 

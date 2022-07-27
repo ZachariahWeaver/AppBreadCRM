@@ -3,6 +3,7 @@ package com.personalproject.AppBreadCRM.issue;
 import com.personalproject.AppBreadCRM.customer.Customer;
 import com.personalproject.AppBreadCRM.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,9 +15,15 @@ public class IssueController {
     private IssueService issueService;
 
     @GetMapping(value = "/customers/{customerId}/orders/{orderId}/issues")
-    public List<Issue> readAllIssues(@PathVariable long orderId){
+    public List<Issue> readAllIssues(@PathVariable long orderId) {
         return issueService.readAllIssues(orderId);
     }
+    @GetMapping(value = "/issues")
+    public Iterable<Issue> readAllIssues() {
+        return issueService.readAllIssues();
+    }
+
+
     @GetMapping(value = "/customers/{customerId}/orders/{orderId}/issues/{id}")
     public Issue readOneIssue(@PathVariable long id){
         return issueService.readOneIssue(id);
