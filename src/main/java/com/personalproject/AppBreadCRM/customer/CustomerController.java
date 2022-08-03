@@ -1,7 +1,9 @@
 package com.personalproject.AppBreadCRM.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -12,8 +14,11 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping(value = "/customers")
-    public List<Customer> readAllCustomers(){
-        return customerService.readAllCustomers();
+    public ModelAndView readAllCustomers(){
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("customers");
+        maw.addObject("customerList", customerService.readAllCustomers());
+        return maw;
     }
     @GetMapping(value = "/customers/{id}")
     public Customer readOneCustomer(@PathVariable long id){

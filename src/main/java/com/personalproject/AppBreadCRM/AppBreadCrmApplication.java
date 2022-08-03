@@ -9,8 +9,7 @@ public class AppBreadCrmApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AppBreadCrmApplication.class, args);
-
-		System.out.println("hello world");
+		System.out.println("WEB APP IS LIVE");
 
 	}
 }
