@@ -155,7 +155,7 @@
 
         <ul class="nav-data-pages">
             <li><a href="/customers">Customers</a></li>
-            <li><a href="/orders"><b>Orders</b></a></li>
+            <li><a href="/orders">Orders</a></li>
             <li><a href="/issues">Issues</a></li>
             <li><a href="/solutions">Knowledge Base</a></li>
 
@@ -171,31 +171,20 @@
 </div>
 <section class="body">
     <div class="container">
-        <h1 class="subheader">Order View</h1>
-        <table>
-            <tr>
-                <th scope="col">Customer Name</th>
-                <th scope="col">Item</th>
-                <th scope="col">Date</th>
-                <th scope="col">Paid</th>
-                <th scope="col">Shipped</th>
-            </tr>
-            <tr th:each="order: ${orderList}">
-                <td th:text="${order.customer.firstName} + ' ' + ${order.customer.lastName}"/>
-                <td th:text="${order.item}" />
-                <td th:text="${order.date}" />
-                <td th:text="${order.paid}" />
-                <td th:text="${order.shipped}" />
+        <h1 class="subheader">Contact Info</h1>
+        <p>
+            Email:&emsp;<a href="mailto:zachariahjweaver@gmail.com">zachariahjweaver@gmail.com</a><br><br>
+            GitHub:&emsp;<a href="https://github.com/ZachariahWeaver">https://github.com/ZachariahWeaver</a><br><br>
+            Twitter:&emsp;<a href="https://twitter.com/ZiggyWeaver">https://twitter.com/ZiggyWeaver</a><br><br>
+        </p>
 
-            </tr>
-        </table>
     </div>
 </section>
 <section class="footer">
     <div>
         <ul>
             <li><a href="/">About</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="/contact"><b>Contact</b></a></li>
         </ul>
         <p>Bread CRM by Zachariah Weaver 2022</p>
     </div>

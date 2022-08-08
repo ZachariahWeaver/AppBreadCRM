@@ -155,9 +155,9 @@
 
         <ul class="nav-data-pages">
             <li><a href="/customers">Customers</a></li>
-            <li><a href="/orders"><b>Orders</b></a></li>
+            <li><a href="/orders">Orders</a></li>
             <li><a href="/issues">Issues</a></li>
-            <li><a href="/solutions">Knowledge Base</a></li>
+            <li><a href="/solutions"><b>Knowledge Base</b></a></li>
 
         </ul>
 
@@ -171,22 +171,17 @@
 </div>
 <section class="body">
     <div class="container">
-        <h1 class="subheader">Order View</h1>
+        <h1 class="subheader">Solutions View</h1>
         <table>
             <tr>
-                <th scope="col">Customer Name</th>
-                <th scope="col">Item</th>
-                <th scope="col">Date</th>
-                <th scope="col">Paid</th>
-                <th scope="col">Shipped</th>
+                <th scope="col">Title</th>
+                <th scope="col">Body</th>
+                <th scope="col">Author</th>
             </tr>
-            <tr th:each="order: ${orderList}">
-                <td th:text="${order.customer.firstName} + ' ' + ${order.customer.lastName}"/>
-                <td th:text="${order.item}" />
-                <td th:text="${order.date}" />
-                <td th:text="${order.paid}" />
-                <td th:text="${order.shipped}" />
-
+            <tr th:each="solution: ${solutionList}">
+                <td th:text="${solution.title}"/>
+                <td th:text="${solution.body}" />
+                <td th:text="${solution.author}" />
             </tr>
         </table>
     </div>

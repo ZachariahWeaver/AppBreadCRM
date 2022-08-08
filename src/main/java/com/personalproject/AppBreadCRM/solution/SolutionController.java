@@ -2,6 +2,7 @@ package com.personalproject.AppBreadCRM.solution;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -12,8 +13,11 @@ public class SolutionController {
     private SolutionService solutionService;
 
     @GetMapping(value = "/solutions")
-    public List<Solution> readAllKnowledge(){
-        return solutionService.readAllSolutions();
+    public ModelAndView readAllSolutions(){
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("solutions");
+        maw.addObject("solutionList", solutionService.readAllSolutions());
+        return maw;
     }
     @GetMapping(value = "/solutions/{id}")
     public Solution readOneSolution(@PathVariable long id){

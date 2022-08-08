@@ -5,6 +5,7 @@ import com.personalproject.AppBreadCRM.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -18,9 +19,13 @@ public class IssueController {
     public List<Issue> readAllIssues(@PathVariable long orderId) {
         return issueService.readAllIssues(orderId);
     }
+
     @GetMapping(value = "/issues")
-    public Iterable<Issue> readAllIssues() {
-        return issueService.readAllIssues();
+    public ModelAndView readAllOrders(){
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("issues");
+        maw.addObject("issueList", issueService.readAllIssues());
+        return maw;
     }
 
 

@@ -13,10 +13,10 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    public List<Order> readAllIssues(long customerId){
+    public List<Order> readAllOrders(long customerId){
         return orderRepository.findByCustomerId(customerId);
     }
-    public Iterable<Order> readAllIssues(){
+    public Iterable<Order> readAllOrders(){
         return orderRepository.findAll();
     }
     public Order readOneOrder(long id){
