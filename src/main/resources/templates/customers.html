@@ -180,13 +180,16 @@
                 <th scope="col">Address</th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone Number</th>
+                <th scope="col">Link</th>
             </tr>
             <tr th:each="customer: ${customerList}">
                 <td th:text="${customer.firstName} + ' ' + ${customer.lastName}" />
                 <td th:text="${customer.address}" />
                 <td th:text="${customer.email}" />
                 <td th:text="${customer.phoneNumber}" />
-
+                <td>
+                        <a th:href="'/customers/' + ${customer.id} + '/orders'">View</a>
+                </td>
             </tr>
         </table>
     </div>

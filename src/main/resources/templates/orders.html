@@ -179,6 +179,8 @@
                 <th scope="col">Date</th>
                 <th scope="col">Paid</th>
                 <th scope="col">Shipped</th>
+                <th scope="col">Link</th>
+
             </tr>
             <tr th:each="order: ${orderList}">
                 <td th:text="${order.customer.firstName} + ' ' + ${order.customer.lastName}"/>
@@ -186,6 +188,9 @@
                 <td th:text="${order.date}" />
                 <td th:text="${order.paid}" />
                 <td th:text="${order.shipped}" />
+                <td>
+                    <a th:href="'/customers/' + ${order.customer.id} + '/orders/' + ${order.id} + '/issues'">View</a>
+                </td>
 
             </tr>
         </table>

@@ -177,11 +177,15 @@
                 <th scope="col">Title</th>
                 <th scope="col">Body</th>
                 <th scope="col">Author</th>
+                <th scope="col">Link</th>
             </tr>
             <tr th:each="solution: ${solutionList}">
                 <td th:text="${solution.title}"/>
                 <td th:text="${solution.body}" />
                 <td th:text="${solution.author}" />
+                <td>
+                    <a th:href="'/solutions/' + ${solution.id}">View</a>
+                </td>
             </tr>
         </table>
     </div>
