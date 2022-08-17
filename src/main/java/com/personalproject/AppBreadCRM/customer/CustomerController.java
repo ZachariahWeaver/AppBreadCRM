@@ -20,10 +20,7 @@ public class CustomerController {
         maw.addObject("customerList", customerService.readAllCustomers());
         return maw;
     }
-    @GetMapping(value = "/customers/{id}")
-    public Customer readOneCustomer(@PathVariable long id){
-        return customerService.readOneCustomer(id);
-    }
+
 
     @PutMapping(value = "/customers")
     public void updateCustomer(Customer customer){

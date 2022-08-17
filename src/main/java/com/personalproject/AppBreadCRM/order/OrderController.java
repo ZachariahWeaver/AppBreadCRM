@@ -16,8 +16,19 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping(value = "/customers/{customerId}/orders")
-    public List<Order> readAllOrders(@PathVariable long customerId){
-         return orderService.readAllOrders(customerId);    }
+    public ModelAndView readOneCustomer(@PathVariable long customerId){
+        ModelAndView maw = new ModelAndView();
+        List<Order> orderList = orderService.readAllOrders(customerId);
+        maw.setViewName("customerpage");
+        if (!orderList.isEmpty()){
+            maw.addObject("orderList", orderList);
+            maw.addObject("customerInfo", orderList.iterator().next().getCustomer());
+        }
+        else{
+            maw.setViewName("index");
+        }
+        return maw;
+    }
 
 
     @GetMapping(value = "/orders")
