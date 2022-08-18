@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bread CRM</title>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" href="/favicon.ico" type="image/ico">
+
     <style>
             @import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@400;700&display=swap");
         body {
@@ -77,52 +77,6 @@
           margin-bottom: 0;
           padding-left: 0;
         }
-        .itemcard{
-          background-color: #212F3C;
-          padding: 0;
-          overflow: hidden;
-        }
-        .itemcard p{
-          position: relative;
-          bottom: 0;
-          padding-left: 200px;
-        }
-        .itemcard li{
-          position: relative;
-          bottom: 0;
-        }
-        .itemcard ul{
-          margin: 0;
-          padding: 20px;
-          overflow: auto;
-
-
-        }
-
-
-        td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 0;
-            border: 1px solid #000000;
-
-
-        }
-        tr:nth-child(even) {background-color: #36454F;}
-        tr:nth-child(odd) {background-color: ##212F3C;}
-        th{
-          background-color: #065B05;
-          color: white;
-          padding: 0;
-          border: 2px solid #000000;
-
-        }
-        table{
-            width: 100%;
-            border: 1px solid #000000;
-            border-spacing: 0;
-
-        }
 
         .footer {
           background-color: rgba(32, 15, 15, 0.9019607843);
@@ -178,9 +132,9 @@
 
         <ul class="nav-data-pages">
             <li><a href="/customers">Customers</a></li>
-            <li><a href="/orders"><b>Orders</b></a></li>
+            <li><a href="/orders">Orders</a></li>
             <li><a href="/issues">Issues</a></li>
-            <li><a href="/solutions">Knowledge Base</a></li>
+            <li><a href="/knowledge">Knowledge Base</a></li>
 
         </ul>
 
@@ -194,23 +148,10 @@
 </div>
 <section class="body">
     <div class="container">
-        <div class="itemcard">
-            <ul>
-                <li>
-                    <a href="#"><img src="/images/order.png" alt="UserIcon" width="138" height="138"></a>
-                </li>
-
-                <li>
-                    <p th:text="'Customer&nbsp' + ${orderInfo.customer.firstName} + ' ' + ${orderInfo.customer.lastName}" />
-                    <p th:text="'Item:&nbsp' + ${orderInfo.item}"></p>
-                    <p th:text="'Ordered:&nbsp' + ${orderInfo.date}"></p>
-                    <p th:text="'Paid:&nbsp' + ${orderInfo.paid}"></p>
-                    <p th:text="'Shipped:&nbsp' + ${orderInfo.shipped}"></p>
-                </li>
-            </ul>
-        </div>
-
-        <a th:href="'/customers/' + ${orderInfo.customer.id} + '/orders/' + ${orderInfo.id} + '/issues'">See issues</a>
+        <h1 class="subheader">Customer does not have orders. Or does not exist</h1>
+        <p class="maintext">
+            Go back to add customer page to add orders.
+        </p>
     </div>
 </section>
 <section class="footer">

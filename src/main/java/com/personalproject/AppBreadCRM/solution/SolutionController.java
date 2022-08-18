@@ -20,8 +20,11 @@ public class SolutionController {
         return maw;
     }
     @GetMapping(value = "/solutions/{id}")
-    public Solution readOneSolution(@PathVariable long id){
-        return solutionService.readOneSolution(id);
+    public ModelAndView readOneSolution(@PathVariable long id){
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("solutionpage");
+        maw.addObject("solutionInfo", solutionService.getSolutionById(id));
+        return maw;
     }
 
     @PutMapping(value = "/solutions")

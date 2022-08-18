@@ -210,7 +210,33 @@
             </ul>
         </div>
 
-        <a th:href="'/customers/' + ${orderInfo.customer.id} + '/orders/' + ${orderInfo.id} + '/issues'">See issues</a>
+        <table>
+            <tr>
+                <th colspan="6" scope="colgroup">     <p th:text="${orderInfo.item} + ' order\'s issue(s):'"></th>
+            </tr>
+            <tr>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Item</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date Open</th>
+                <th scope="col">Date Closed</th>
+                <th scope="col">View</th>
+
+
+            </tr>
+            <tr th:each="issue: ${issueList}">
+                <td th:text="${issue.order.customer.firstName} + ' ' + ${issue.order.customer.lastName}"/>
+                <td th:text="${issue.order.item}" />
+                <td th:text="${issue.description}" />
+                <td th:text="${issue.dateOpen}" />
+                <td th:text="${issue.dateClosed}" />
+
+                <td>
+                    <a th:href="'/customers/' + ${issue.order.customer.id} + '/orders/' + ${issue.order.id} + '/issues/' + ${issue.id}">View</a>
+                </td>
+
+            </tr>
+        </table>
     </div>
 </section>
 <section class="footer">

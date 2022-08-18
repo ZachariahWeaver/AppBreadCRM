@@ -1,5 +1,6 @@
 package com.personalproject.AppBreadCRM.customer;
 
+import com.personalproject.AppBreadCRM.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,13 @@ public class CustomerController {
         maw.addObject("customerList", customerService.readAllCustomers());
         return maw;
     }
-
+    @GetMapping(value = "/customers/{id}")
+    public ModelAndView readOneCustomer(@PathVariable long id){
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("customerpage");
+        maw.addObject("customerInfo", customerService.getCustomerById(id));
+        return maw;
+    }
 
     @PutMapping(value = "/customers")
     public void updateCustomer(Customer customer){

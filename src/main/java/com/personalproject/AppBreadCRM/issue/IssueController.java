@@ -16,12 +16,22 @@ public class IssueController {
     private IssueService issueService;
 
     @GetMapping(value = "/customers/{customerId}/orders/{orderId}/issues")
-    public List<Issue> readAllIssues(@PathVariable long orderId) {
-        return issueService.readAllIssues(orderId);
+    public ModelAndView readAllIssues(@PathVariable long orderId){
+        ModelAndView maw = new ModelAndView();
+        List<Issue> issueList = issueService.readAllIssues(orderId);
+        maw.setViewName("orderissuespage");
+        if (!issueList.isEmpty()){
+            maw.addObject("issueList", issueList);
+            maw.addObject("orderInfo", issueList.iterator().next().getOrder());
+        }
+        else{
+            maw.setViewName("ordernoissuespage.html");
+        }
+        return maw;
     }
 
     @GetMapping(value = "/issues")
-    public ModelAndView readAllOrders(){
+    public ModelAndView readAllIssues(){
         ModelAndView maw = new ModelAndView();
         maw.setViewName("issues");
         maw.addObject("issueList", issueService.readAllIssues());
@@ -30,8 +40,11 @@ public class IssueController {
 
 
     @GetMapping(value = "/customers/{customerId}/orders/{orderId}/issues/{id}")
-    public Issue readOneIssue(@PathVariable long id){
-        return issueService.readOneIssue(id);
+    public ModelAndView readOneIssue(@PathVariable long id){
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("issuePage");
+        maw.addObject("issueInfo", issueService.getIssueById(id));
+        return maw;
     }
 
     @PutMapping(value = "/customers/{customerId}/orders/{orderId}/issues")
