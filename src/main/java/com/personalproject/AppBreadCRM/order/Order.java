@@ -1,6 +1,8 @@
 package com.personalproject.AppBreadCRM.order;
 
 import com.personalproject.AppBreadCRM.customer.Customer;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,7 @@ public class Order {
     @ManyToOne
     @Autowired
     @JoinColumn(name="CUSTOMER", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Customer customer;
     @Column(name="ITEM", nullable = false)
     private String item;

@@ -59,7 +59,11 @@ public class IssueController {
     }
 
     @DeleteMapping(value = "/customers/{customerId}/orders/{orderId}/issues/{id}")
-    public void deleteIssue(@PathVariable long id){
-        issueService.deleteIssue(id);
-    }
+    @ResponseBody
+        public ModelAndView deleteIssue(@PathVariable("customerId") long customerId, @PathVariable("orderId") long orderId, @PathVariable("id") long id) {
+            issueService.deleteIssue(id);
+            return new ModelAndView("redirect:/customers/" + customerId  + "/orders/" + orderId + "/issues/");
+
+
+        }
 }

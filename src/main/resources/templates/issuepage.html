@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bread CRM</title>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" href="/favicon.ico" type="image/ico">
+    <link rel="icon" href="/favicon.ico" type="/image/ico">
     <style>
             @import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@400;700&display=swap");
         body {
@@ -188,6 +188,11 @@
             <li><a href="#"><img src="/images/UserLogo.jpg" alt="UserIcon" width="25" height="25"></a></li>
             <li><a href="#">Username</a></li>
         </ul>
+        </li>
+        <form action="" th:method="delete">
+            <input type="submit"th:href="'issues/' + ${issueInfo.id}" th:value="'Delete' + ${issueInfo.id}" />
+        </form>
+
     </div>
 
 </section>

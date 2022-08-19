@@ -38,7 +38,10 @@ public class SolutionController {
     }
 
     @DeleteMapping(value = "/solutions/{id}")
-    public void deleteCustomer(@PathVariable("id") long id){
+    @ResponseBody
+    public ModelAndView deleteSolution(@PathVariable("id") long id){
         solutionService.deleteSolution(id);
+        return new ModelAndView("redirect:/solutions");
+
     }
 }

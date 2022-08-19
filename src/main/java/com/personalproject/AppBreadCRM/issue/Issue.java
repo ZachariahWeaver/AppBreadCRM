@@ -1,6 +1,8 @@
 package com.personalproject.AppBreadCRM.issue;
 
 import com.personalproject.AppBreadCRM.order.Order;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +20,11 @@ public class Issue {
     @ManyToOne
     @Autowired
     @JoinColumn(name="CUSTOMER_ORDER", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Order order;
+    @Column(name="TITLE", nullable = false)
+    private String title;
+
     @Column(name="DESCRIPTION", nullable = false)
     private String description;
     @Column(name="DATE_OPEN", nullable = false)
@@ -29,16 +35,18 @@ public class Issue {
     public Issue() {
     }
 
-    public Issue(long id, Order order, String description, String dateOpen, String dateClosed) {
+    public Issue(long id, Order order, String title, String description, String dateOpen, String dateClosed) {
         this.id = id;
         this.order = order;
+        this.title = title;
         this.description = description;
         this.dateOpen = dateOpen;
         this.dateClosed = dateClosed;
     }
 
-    public Issue(Order order, String description, String dateOpen, String dateClosed) {
+    public Issue(Order order, String title, String description, String dateOpen, String dateClosed) {
         this.order = order;
+        this.title = title;
         this.description = description;
         this.dateOpen = dateOpen;
         this.dateClosed = dateClosed;
@@ -52,6 +60,13 @@ public class Issue {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
     public Order getOrder() {
         return order;
     }

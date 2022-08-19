@@ -19,20 +19,25 @@ public class Solution {
     @Column(name="AUTHOR", nullable = false)
     private String author;
 
+    @Column(name="DATE", nullable = false)
+    private String publishDate;
+
     public Solution() {
     }
 
-    public Solution(long id, String title, String body, String author) {
+    public Solution(long id, String title, String body, String author, String publishDate) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.author = author;
+        this.publishDate = publishDate;
     }
 
-    public Solution(String title, String body, String author) {
+    public Solution(String title, String body, String author, String publishDate) {
         this.title = title;
         this.body = body;
         this.author = author;
+        this.publishDate = publishDate;
     }
 
     public long getId() {
@@ -65,5 +70,13 @@ public class Solution {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
     }
 }

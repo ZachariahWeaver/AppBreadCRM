@@ -57,8 +57,11 @@ public class OrderController {
         orderService.createOrder(order);
     }
 
-    @DeleteMapping(value = "/customers/{customerId}/orders")
-    public void deleteOrder(@PathVariable long id){
+    @DeleteMapping(value = "/customers/{customerId}/orders/{id}")
+    @ResponseBody
+    public ModelAndView deleteOrder(@PathVariable("customerId") long customerId, @PathVariable("id") long id) {
         orderService.deleteOrder(id);
+
+        return new ModelAndView("redirect:/customers/" + customerId  + "/orders/");
     }
 }

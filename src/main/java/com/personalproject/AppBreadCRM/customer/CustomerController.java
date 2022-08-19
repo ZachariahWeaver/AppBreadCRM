@@ -40,7 +40,10 @@ public class CustomerController {
     }
 
     @DeleteMapping(value = "/customers/{id}")
-    public void deleteCustomer(@PathVariable("id") long id){
+    @ResponseBody
+    public ModelAndView deleteCustomer(@PathVariable("id") long id){
         customerService.deleteCustomer(id);
+        return new ModelAndView("redirect:/customers/");
+
     }
 }
