@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -174,7 +174,26 @@
 <section class="body">
     <div class="container">
         <h1 class="subheader">Customer View</h1>
-        <table>
+        <h1>Form</h1>
+        <form method="post" th:object="${cust}" th:action="@{/customers}">
+
+            <input type="number" th:field="*{id}" placeholder="Id"/>
+
+            <input type="text" th:field="*{firstName}" placeholder="First Name"/>
+
+            <input type="text" th:field="*{lastName}" placeholder="Last Name"/>
+
+            <input type="text" th:field="*{address}" placeholder="Address"/>
+
+            <input type="text" th:field="*{email}" placeholder="Email"/>
+
+            <input type="text" th:field="*{phoneNumber}" placeholder="Phone Number"/>
+
+            <button type="submit">Add Customer</button>
+
+        </form>
+
+            <table>
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Address</th>
@@ -187,6 +206,7 @@
                 <td th:text="${customer.address}" />
                 <td th:text="${customer.email}" />
                 <td th:text="${customer.phoneNumber}" />
+
                 <td>
                         <a th:href="'/customers/' + ${customer.id}">View</a>
                 </td>

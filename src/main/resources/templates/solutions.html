@@ -172,21 +172,41 @@
 <section class="body">
     <div class="container">
         <h1 class="subheader">Solutions View</h1>
+
         <table>
             <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Body</th>
                 <th scope="col">Author</th>
-                <th scope="col">Link</th>
+                <th scope="col">Publish Date</th>
+                <th scope="col">Action</th>
             </tr>
+
+
+            </form>
             <tr th:each="solution: ${solutionList}">
                 <td th:text="${solution.title}"/>
                 <td th:text="${solution.body}" />
                 <td th:text="${solution.author}" />
+                <td th:text="${solution.publishDate}" />
+
                 <td>
                     <a th:href="'/solutions/' + ${solution.id}">View</a>
                 </td>
             </tr>
+
+            <form method="post" th:object="${sol}" th:action="@{/solutions}">
+
+                <tr>
+                    <td><input type="text" th:field="*{title}" placeholder="Title"/></td>
+                    <td><input type="text" th:field="*{body}" placeholder="Body"/></td>
+
+                    <td><input type="text" th:field="*{author}" placeholder="Author"/></td>
+
+                    <td><input type="text" th:field="*{publishDate}" placeholder="Publish Date"/></td>
+
+                    <td><button type="submit">Add Solution</button></td>
+                </tr>
         </table>
     </div>
 </section>

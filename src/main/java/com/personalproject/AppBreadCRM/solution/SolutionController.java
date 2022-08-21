@@ -1,5 +1,6 @@
 package com.personalproject.AppBreadCRM.solution;
 
+import com.personalproject.AppBreadCRM.customer.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,8 +16,11 @@ public class SolutionController {
     @GetMapping(value = "/solutions")
     public ModelAndView readAllSolutions(){
         ModelAndView maw = new ModelAndView();
+        Solution sol = new Solution();
+
         maw.setViewName("solutions");
         maw.addObject("solutionList", solutionService.readAllSolutions());
+        maw.addObject("sol", new Solution());
         return maw;
     }
     @GetMapping(value = "/solutions/{id}")
@@ -24,6 +28,7 @@ public class SolutionController {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("solutionpage");
         maw.addObject("solutionInfo", solutionService.getSolutionById(id));
+
         return maw;
     }
 
@@ -33,8 +38,16 @@ public class SolutionController {
     }
 
     @PostMapping(value = "/solutions")
-    public void createSolution(@RequestBody Solution solution){
+    public ModelAndView createSolution(@ModelAttribute ("sol") Solution solution){
         solutionService.createSolution(solution);
+
+        ModelAndView maw = new ModelAndView();
+        Solution sol = new Solution();
+        maw.setViewName("solutions");
+        maw.addObject("solutionList", solutionService.readAllSolutions());
+        maw.addObject("sol", new Solution());
+        return maw;
+
     }
 
     @DeleteMapping(value = "/solutions/{id}")

@@ -1,6 +1,7 @@
 package com.personalproject.AppBreadCRM.customer;
 
 import com.personalproject.AppBreadCRM.order.Order;
+import net.bytebuddy.matcher.StringMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,10 @@ public class CustomerController {
     @GetMapping(value = "/customers")
     public ModelAndView readAllCustomers(){
         ModelAndView maw = new ModelAndView();
+        Customer cust = new Customer();
         maw.setViewName("customers");
         maw.addObject("customerList", customerService.readAllCustomers());
+        maw.addObject("cust", new Customer());
         return maw;
     }
     @GetMapping(value = "/customers/{id}")
@@ -35,8 +38,15 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/customers")
-    public void createCustomer(@RequestBody Customer customer){
+    public ModelAndView createCustomer(@ModelAttribute ("cust") Customer customer){
         customerService.createCustomer(customer);
+
+        ModelAndView maw = new ModelAndView();
+        Customer cust = new Customer();
+        maw.setViewName("customers");
+        maw.addObject("customerList", customerService.readAllCustomers());
+        maw.addObject("cust", new Customer());
+        return maw;
     }
 
     @DeleteMapping(value = "/customers/{id}")
