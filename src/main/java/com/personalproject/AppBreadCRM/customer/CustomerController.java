@@ -28,13 +28,21 @@ public class CustomerController {
     public ModelAndView readOneCustomer(@PathVariable long id){
         ModelAndView maw = new ModelAndView();
         maw.setViewName("customerpage");
+        maw.addObject("ord", new Order());
         maw.addObject("customerInfo", customerService.getCustomerById(id));
+
         return maw;
     }
 
     @PutMapping(value = "/customers")
-    public void updateCustomer(Customer customer){
+    public ModelAndView updateCustomer(@ModelAttribute Customer customer){
         customerService.updateCustomer(customer);
+        ModelAndView maw = new ModelAndView();
+        Customer cust = new Customer();
+        maw.setViewName("customers");
+        maw.addObject("customerList", customerService.readAllCustomers());
+        maw.addObject("cust", new Customer());
+        return maw;
     }
 
     @PostMapping(value = "/customers")
@@ -49,11 +57,16 @@ public class CustomerController {
         return maw;
     }
 
-    @DeleteMapping(value = "/customers/{id}")
+    @DeleteMapping(value = "/customers")
     @ResponseBody
-    public ModelAndView deleteCustomer(@PathVariable("id") long id){
+    public ModelAndView deleteCustomer(@ModelAttribute("id") long id){
         customerService.deleteCustomer(id);
-        return new ModelAndView("redirect:/customers/");
 
+        ModelAndView maw = new ModelAndView();
+        Customer cust = new Customer();
+        maw.setViewName("customers");
+        maw.addObject("customerList", customerService.readAllCustomers());
+        maw.addObject("cust", new Customer());
+        return maw;
     }
 }

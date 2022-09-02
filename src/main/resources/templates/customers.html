@@ -174,24 +174,6 @@
 <section class="body">
     <div class="container">
         <h1 class="subheader">Customer View</h1>
-        <h1>Form</h1>
-        <form method="post" th:object="${cust}" th:action="@{/customers}">
-
-            <input type="number" th:field="*{id}" placeholder="Id"/>
-
-            <input type="text" th:field="*{firstName}" placeholder="First Name"/>
-
-            <input type="text" th:field="*{lastName}" placeholder="Last Name"/>
-
-            <input type="text" th:field="*{address}" placeholder="Address"/>
-
-            <input type="text" th:field="*{email}" placeholder="Email"/>
-
-            <input type="text" th:field="*{phoneNumber}" placeholder="Phone Number"/>
-
-            <button type="submit">Add Customer</button>
-
-        </form>
 
             <table>
             <tr>
@@ -208,8 +190,27 @@
                 <td th:text="${customer.phoneNumber}" />
 
                 <td>
-                        <a th:href="'/customers/' + ${customer.id}">View</a>
-                </td>
+                    <form method="delete" th:object="${customer.id}" th:action="@{/customers}">
+                        <input type="submit"th:href="/customers/" th:value="Delete Customer"/>
+                    </form>                </td>
+
+            </tr>
+            <tr>
+                <form method="post" th:object="${cust}" th:action="@{/customers}">
+
+                    <td> <input type="text" th:field="*{firstName}" placeholder="First Name"/>
+
+                    <input type="text" th:field="*{lastName}" placeholder="Last Name"/></td>
+
+                    <td><input type="text" th:field="*{address}" placeholder="Address"/></td>
+
+                    <td><input type="text" th:field="*{email}" placeholder="Email"/></td>
+
+                    <td><input type="text" th:field="*{phoneNumber}" placeholder="Phone Number"/></td>
+
+                    <td><button type="submit">Add Customer</button></td>
+
+                </form>
             </tr>
         </table>
     </div>

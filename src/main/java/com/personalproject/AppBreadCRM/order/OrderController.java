@@ -1,6 +1,7 @@
 package com.personalproject.AppBreadCRM.order;
 
 import com.personalproject.AppBreadCRM.customer.Customer;
+import com.personalproject.AppBreadCRM.customer.CustomerService;
 import com.personalproject.AppBreadCRM.issue.Issue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,19 +15,18 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping(value = "/customers/{customerId}/orders")
-    public ModelAndView readOneCustomer(@PathVariable long customerId){
+    public ModelAndView readAllOrdersByCustomer(@PathVariable long customerId){
         ModelAndView maw = new ModelAndView();
         List<Order> orderList = orderService.readAllOrders(customerId);
+        Order ord = new Order();
         maw.setViewName("customerorderspage");
-        if (!orderList.isEmpty()){
-            maw.addObject("orderList", orderList);
-            maw.addObject("customerInfo", orderList.iterator().next().getCustomer());
-        }
-        else{
-            maw.setViewName("customernoorderspage.html");
-        }
+        maw.addObject("orderList", orderList);
+        maw.addObject("customerInfo", customerService.readOneCustomer(customerId));
+        maw.addObject("ord", new Order());
         return maw;
     }
 
@@ -52,9 +52,18 @@ public class OrderController {
     }
 
     @PostMapping(value = "/customers/{customerId}/orders")
-    public void createOrder(@RequestBody Order order, @PathVariable long customerId){
+    public ModelAndView createOrder(@ModelAttribute Order order, @PathVariable long customerId){
         order.setCustomer(new Customer(customerId, "", "", "", "", ""));
         orderService.createOrder(order);
+
+        ModelAndView maw = new ModelAndView();
+        List<Order> orderList = orderService.readAllOrders(customerId);
+        Order ord = new Order();
+        maw.setViewName("customerorderspage");
+        maw.addObject("orderList", orderList);
+        maw.addObject("customerInfo", customerService.readOneCustomer(customerId));
+        maw.addObject("ord", new Order());
+        return maw;
     }
 
     @DeleteMapping(value = "/customers/{customerId}/orders/{id}")

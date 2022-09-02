@@ -2,6 +2,7 @@ package com.personalproject.AppBreadCRM.issue;
 
 import com.personalproject.AppBreadCRM.customer.Customer;
 import com.personalproject.AppBreadCRM.order.Order;
+import com.personalproject.AppBreadCRM.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,18 +16,18 @@ public class IssueController {
     @Autowired
     private IssueService issueService;
 
+    @Autowired
+    private OrderService orderService;
+
     @GetMapping(value = "/customers/{customerId}/orders/{orderId}/issues")
     public ModelAndView readAllIssues(@PathVariable long orderId){
         ModelAndView maw = new ModelAndView();
         List<Issue> issueList = issueService.readAllIssues(orderId);
         maw.setViewName("orderissuespage");
-        if (!issueList.isEmpty()){
-            maw.addObject("issueList", issueList);
-            maw.addObject("orderInfo", issueList.iterator().next().getOrder());
-        }
-        else{
-            maw.setViewName("ordernoissuespage.html");
-        }
+        maw.addObject("issueList", issueList);
+        maw.addObject("orderInfo", orderService.getOrderById(orderId));
+        maw.addObject("iss", new Issue());
+
         return maw;
     }
 
@@ -53,9 +54,18 @@ public class IssueController {
     }
 
     @PostMapping(value = "/customers/{customerId}/orders/{orderId}/issues")
-    public void createIssue(@RequestBody Issue issue, @PathVariable long customerId, @PathVariable long orderId){
+    public ModelAndView createIssue(@ModelAttribute Issue issue, @PathVariable long customerId, @PathVariable long orderId){
         issue.setOrder(new Order(orderId, customerId, "", "", false, false));
         issueService.createIssue(issue);
+
+        ModelAndView maw = new ModelAndView();
+        List<Issue> issueList = issueService.readAllIssues(orderId);
+        maw.setViewName("orderissuespage");
+        maw.addObject("issueList", issueList);
+        maw.addObject("orderInfo", orderService.getOrderById(orderId));
+        maw.addObject("iss", new Issue());
+
+        return maw;
     }
 
     @DeleteMapping(value = "/customers/{customerId}/orders/{orderId}/issues/{id}")

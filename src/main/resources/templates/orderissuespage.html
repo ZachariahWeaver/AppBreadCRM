@@ -214,18 +214,16 @@
                 <th colspan="6" scope="colgroup">     <p th:text="${orderInfo.item} + ' order\'s issue(s):'"></th>
             </tr>
             <tr>
-                <th scope="col">Customer Name</th>
-                <th scope="col">Item</th>
+                <th scope="col">Title</th>
                 <th scope="col">Description</th>
                 <th scope="col">Date Open</th>
                 <th scope="col">Date Closed</th>
-                <th scope="col">View</th>
+                <th scope="col">Link</th>
 
 
             </tr>
             <tr th:each="issue: ${issueList}">
-                <td th:text="${issue.order.customer.firstName} + ' ' + ${issue.order.customer.lastName}"/>
-                <td th:text="${issue.order.item}" />
+                <td th:text="${issue.title}" />
                 <td th:text="${issue.description}" />
                 <td th:text="${issue.dateOpen}" />
                 <td th:text="${issue.dateClosed}" />
@@ -234,6 +232,21 @@
                     <a th:href="'/customers/' + ${issue.order.customer.id} + '/orders/' + ${issue.order.id} + '/issues/' + ${issue.id}">View</a>
                 </td>
 
+            </tr>
+            <tr>
+                <form method="post" th:object="${iss}" th:action="@{/customers/__${orderInfo.customer.id}__/orders/__${orderInfo.id}__/issues/}">
+
+                    <td><input type="text" th:field="*{title}" placeholder="Title"/></td>
+
+                    <td><input type="text" th:field="*{description}" placeholder="description"/></td>
+
+                    <td><input type="text" th:field="*{dateOpen}" placeholder="dateOpen"/></td>
+
+                    <td><input type="text" th:field="*{dateClosed}" placeholder="dateClosed"/></td>
+
+                    <td><button type="submit">Add issue</button></td>
+
+                </form>
             </tr>
         </table>
     </div>

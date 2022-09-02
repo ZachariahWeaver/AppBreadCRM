@@ -211,8 +211,35 @@
     <form action="" th:method="delete">
       <input type="submit"th:href="'customers/' + ${customerInfo.id}" th:value="'Delete' + ${customerInfo.id}" />
     </form>
+    <table>
+      <tr>
+        <th colspan="6" scope="colgroup">     <p th:text="${customerInfo.firstName} + ' ' + ${customerInfo.lastName} + '\'s order(s):'"></th>
+      </tr>
+      <tr>
+        <th scope="col">Item</th>
+        <th scope="col">Date</th>
+        <th scope="col">Paid</th>
+        <th scope="col">Shipped</th>
+        <th scope="col">Link</th>
 
-    <a th:href="'/customers/' + ${customerInfo.id} + '/orders'">See orders</a>
+      </tr>
+
+      <tr>
+        <form method="post" th:object="${ord}" th:action="@{/customers/__${customerInfo.id}__/orders/}">
+
+          <td><input type="text" th:field="*{item}" placeholder="Item"/></td>
+
+          <td><input type="text" th:field="*{date}" placeholder="Date"/></td>
+
+          <td><input type="checkbox" th:checked="*{paid}"/></td>
+
+          <td><input type="checkbox" th:checked="*{shipped}"/></td>
+
+          <td><button type="submit">Add order</button></td>
+
+        </form>
+      </tr>
+    </table>
   </div>
 </section>
 <section class="footer">

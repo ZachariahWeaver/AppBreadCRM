@@ -199,12 +199,24 @@
         <li>
           <a href="#"><img src="/images/UserLogo.jpg" alt="UserIcon" width="138" height="138"></a>
         </li>
-
+        <form method="post" th:object="${customerInfo}" th:action="@{/customers}">
+          <input type="hidden" th:field="*{id}"/>
+          <input type="text" th:field="*{firstName}"/>
+          <input type="text" th:field="*{lastName}"/>
+          <input type="text" th:field="*{address}"/>
+          <input type="text" th:field="*{email}"/>
+          </p><input type="text" th:field="*{phoneNumber}"/>
+          <button type="submit">Update Customer</button>
+        </form>
         <li>
           <p th:text="'Name:&nbsp' + ${customerInfo.firstName} + ' ' + ${customerInfo.lastName}"></p>
           <p th:text="'Address:&nbsp' + ${customerInfo.address}"></p>
           <p th:text="'Phone Number:&nbsp' + ${customerInfo.phoneNumber}"></p>
-          <p th:text="'Email Address:&nbsp' + ${customerInfo.email}"></p>
+          <p th:text="'Email Address:&nbsp' + ${customerInfo.email}">
+
+        <form action="" th:method="delete">
+            <input type="submit"th:href="'customers/' + ${customerInfo.id}" th:value="'Delete' + ${customerInfo.id}" />
+          </form>
         </li>
       </ul>
     </div>
@@ -214,7 +226,6 @@
         <th colspan="6" scope="colgroup">     <p th:text="${customerInfo.firstName} + ' ' + ${customerInfo.lastName} + '\'s order(s):'"></th>
       </tr>
       <tr>
-        <th scope="col">Customer Name</th>
         <th scope="col">Item</th>
         <th scope="col">Date</th>
         <th scope="col">Paid</th>
@@ -223,15 +234,29 @@
 
       </tr>
       <tr th:each="order: ${orderList}">
-        <td th:text="${order.customer.firstName} + ' ' + ${order.customer.lastName}"/>
         <td th:text="${order.item}" />
         <td th:text="${order.date}" />
         <td th:text="${order.paid}" />
         <td th:text="${order.shipped}" />
         <td>
-          <a th:href="'/customers/' + ${order.customer.id} + '/orders/' + ${order.id}">View</a>
+          <a th:href="'/customers/' + ${order.customer.id} + '/orders/' + ${order.id} + '/issues/'">Viewpp</a>
         </td>
 
+      </tr>
+      <tr>
+        <form method="post" th:object="${ord}" th:action="@{/customers/__${customerInfo.id}__/orders/}">
+
+          <td><input type="text" th:field="*{item}" placeholder="Item"/></td>
+
+          <td><input type="text" th:field="*{date}" placeholder="Date"/></td>
+
+          <td><input type="checkbox" th:checked="*{paid}"/></td>
+
+          <td><input type="checkbox" th:checked="*{shipped}"/></td>
+
+          <td><button type="submit">Add order</button></td>
+
+        </form>
       </tr>
     </table>
   </div>
