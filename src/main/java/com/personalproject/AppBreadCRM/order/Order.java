@@ -44,7 +44,7 @@ public class Order {
     }
 
     public Order(long customerId, String item, String date, boolean paid, boolean shipped) {
-        this.customer = new Customer(customerId, "", "", "", "", "");;
+        this.customer = new Customer(customerId, "", "", "", "", "");
         this.item = item;
         this.date = date;
         this.paid = paid;
