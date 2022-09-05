@@ -33,8 +33,16 @@ public class SolutionController {
     }
 
     @PutMapping(value = "/solutions")
-    public void updateSolution(Solution solution){
-        solutionService.updateSolution(solution);
+    public ModelAndView updateSolution (@ModelAttribute ("sol") Solution solution){
+        solutionService.createSolution(solution);
+
+        ModelAndView maw = new ModelAndView();
+        Solution sol = new Solution();
+        maw.setViewName("solutions");
+        maw.addObject("solutionList", solutionService.readAllSolutions());
+        maw.addObject("sol", new Solution());
+        return maw;
+
     }
 
     @PostMapping(value = "/solutions")

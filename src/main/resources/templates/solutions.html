@@ -180,24 +180,33 @@
                 <th scope="col">Author</th>
                 <th scope="col">Publish Date</th>
                 <th scope="col">Action</th>
+                <th scope="col">Delete</th>
+
             </tr>
 
 
-            </form>
             <tr th:each="solution: ${solutionList}">
                 <td th:text="${solution.title}"/>
-                <td th:text="${solution.body}" />
+                <td th:text="${solution.body}"/>
                 <td th:text="${solution.author}" />
                 <td th:text="${solution.publishDate}" />
 
                 <td>
-                    <a th:href="'/solutions/' + ${solution.id}">View</a>
+                    <form th:action="@{/solutions/} + ${solution.id}" th:method="get">
+                        <button type="submit">Submit</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/solutions/} + ${solution.id}" th:method="delete">
+                        <button type="submit">Submit</button>
+                    </form>
                 </td>
             </tr>
 
-            <form method="post" th:object="${sol}" th:action="@{/solutions}">
 
                 <tr>
+                    <form method="post" th:object="${sol}" th:action="@{/solutions}">
+
                     <td><input type="text" th:field="*{title}" placeholder="Title"/></td>
                     <td><input type="text" th:field="*{body}" placeholder="Body"/></td>
 
@@ -205,7 +214,8 @@
 
                     <td><input type="text" th:field="*{publishDate}" placeholder="Publish Date"/></td>
 
-                    <td><button type="submit">Add Solution</button></td>
+                    <td colspan="2" ><button type="submit">Add Solution</button></td>
+                    </form>
                 </tr>
         </table>
     </div>

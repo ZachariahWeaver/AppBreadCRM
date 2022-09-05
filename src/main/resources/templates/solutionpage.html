@@ -200,16 +200,23 @@
     <div class="container">
         <div class="itemcard">
             <ul>
+                <form method="post" th:object="${solutionInfo}" th:action="@{/solutions/}">
+                    <input type="hidden" th:field="*{id}"/>
+                    <input type="text" th:field="*{title}"/>
+                    <input type="text" th:field="*{body}"/>
+                    <input type="text" th:field="*{author}"/>
+                    <input type="text" th:field="*{publishDate}"/>
+
+                    <button type="submit">Update Solutions</button>
+                </form>
                 <li><h1 th:text = "${solutionInfo.title}"></h1></li>
 
                 <li>
                     <p class ="solutionbody" th:text="${solutionInfo.body}" />
 
                     <p class ="authortag" th:text="'Author:&nbsp' + ${solutionInfo.author}"></p>
+                    <p class = "authortag" th:text="'Publish Date:&nbsp' + ${solutionInfo.publishDate}"></p>
                 </li>
-                <form action="" th:method="delete">
-                    <input type="submit"th:href="'solutions/' + ${solutionInfo.id}" th:value="'Delete' + ${solutionInfo.id}" />
-                </form>
 
             </ul>
         </div>
