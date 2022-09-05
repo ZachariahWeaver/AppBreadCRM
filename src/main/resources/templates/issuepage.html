@@ -189,10 +189,6 @@
             <li><a href="#">Username</a></li>
         </ul>
         </li>
-        <form action="" th:method="delete">
-            <input type="submit"th:href="'issues/' + ${issueInfo.id}" th:value="'Delete' + ${issueInfo.id}" />
-        </form>
-
     </div>
 
 </section>
@@ -205,6 +201,15 @@
                     <a href="#"><img src="/images/issue.png" alt="UserIcon" width="138" height="138"></a>
                 </li>
 
+                <form method="post" th:object="${issueInfo}" th:action="@{/customers/} + ${issueInfo.order.customer.id} + '/orders/' + ${issueInfo.order.id}">
+                    <input type="hidden" th:field="*{order}"/>
+                    <input type="hidden" th:field="*{id}"/>
+                    <input type="text" th:field="*{title}"/>
+                    <input type="text" th:field="*{description}"/>
+                    <input type="text" th:field="*{dateOpen}"/>
+                    <input type="text" th:field="*{dateClosed}"/>
+                    <button type="submit">Update Issue</button>
+                </form>
                 <li>
                     <p th:text="'Customer:&nbsp' + ${issueInfo.order.customer.firstName} + ' ' + ${issueInfo.order.customer.lastName}" />
                     <p th:text="'Item:&nbsp' + ${issueInfo.order.item}"></p>

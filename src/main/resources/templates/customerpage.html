@@ -208,9 +208,6 @@
         </li>
       </ul>
     </div>
-    <form action="" th:method="delete">
-      <input type="submit"th:href="'customers/' + ${customerInfo.id}" th:value="'Delete' + ${customerInfo.id}" />
-    </form>
     <table>
       <tr>
         <th colspan="6" scope="colgroup">     <p th:text="${customerInfo.firstName} + ' ' + ${customerInfo.lastName} + '\'s order(s):'"></th>

@@ -199,7 +199,16 @@
                 <li>
                     <a href="#"><img src="/images/order.png" alt="UserIcon" width="138" height="138"></a>
                 </li>
-
+                <form method="post" th:object="${orderInfo}" th:action="@{/customers/} + ${orderInfo.customer.id}">
+                    <input type="hidden" th:field="*{customer}"/>
+                    <input type="hidden" th:field="*{id}"/>
+                    <input type="text" th:field="*{item}"/>
+                    <input type="text" th:field="*{date}"/>
+                    <input type="checkbox" th:field="*{paid}"/>
+                    <input type="checkbox" th:field="*{shipped}"/>
+                    <button type="submit">Update Order</button>
+                </form>
+                <li>
                 <li>
                     <p th:text="'Customer&nbsp' + ${orderInfo.customer.firstName} + ' ' + ${orderInfo.customer.lastName}" />
                     <p th:text="'Item:&nbsp' + ${orderInfo.item}"></p>
@@ -219,6 +228,7 @@
                 <th scope="col">Date Open</th>
                 <th scope="col">Date Closed</th>
                 <th scope="col">Link</th>
+                <th scope="col">Delete</th>
 
 
             </tr>
@@ -229,12 +239,19 @@
                 <td th:text="${issue.dateClosed}" />
 
                 <td>
-                    <a th:href="'/customers/' + ${issue.order.customer.id} + '/orders/' + ${issue.order.id} + '/issues/' + ${issue.id}">View</a>
+                    <form th:action="@{/customers/} + ${issue.order.customer.id} + '/orders/' + ${issue.order.id} + '/issues/' + ${issue.id}" th:method="get">
+                        <button type="submit">Submit</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/customers/} + ${issue.order.customer.id} + '/orders/' + ${issue.order.id} + '/issues/' + ${issue.id}" th:method="delete">
+                        <button type="submit">Submit</button>
+                    </form>
                 </td>
 
             </tr>
             <tr>
-                <form method="post" th:object="${iss}" th:action="@{/customers/__${orderInfo.customer.id}__/orders/__${orderInfo.id}__/issues/}">
+                <form method="post" th:object="${iss}" th:action="@{/customers/} + ${orderInfo.customer.id} + '/orders/' + ${orderInfo.id}">
 
                     <td><input type="text" th:field="*{title}" placeholder="Title"/></td>
 

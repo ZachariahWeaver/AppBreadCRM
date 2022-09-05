@@ -213,10 +213,6 @@
           <p th:text="'Address:&nbsp' + ${customerInfo.address}"></p>
           <p th:text="'Phone Number:&nbsp' + ${customerInfo.phoneNumber}"></p>
           <p th:text="'Email Address:&nbsp' + ${customerInfo.email}">
-
-        <form action="" th:method="delete">
-            <input type="submit"th:href="'customers/' + ${customerInfo.id}" th:value="'Delete' + ${customerInfo.id}" />
-          </form>
         </li>
       </ul>
     </div>
@@ -231,6 +227,8 @@
         <th scope="col">Paid</th>
         <th scope="col">Shipped</th>
         <th scope="col">Link</th>
+        <th scope="col">Delete</th>
+
 
       </tr>
       <tr th:each="order: ${orderList}">
@@ -239,12 +237,19 @@
         <td th:text="${order.paid}" />
         <td th:text="${order.shipped}" />
         <td>
-          <a th:href="'/customers/' + ${order.customer.id} + '/orders/' + ${order.id} + '/issues/'">Viewpp</a>
+          <form th:action="@{/customers/} + ${order.customer.id} + '/orders/' + ${order.id} + '/issues/'" th:method="get">
+            <button type="submit">Submit</button>
+          </form>
+        </td>
+        <td>
+          <form th:action="@{/customers/} + ${order.customer.id} + '/orders/' + ${order.id}" th:method="delete">
+            <button type="submit">Submit</button>
+          </form>
         </td>
 
       </tr>
       <tr>
-        <form method="post" th:object="${ord}" th:action="@{/customers/__${customerInfo.id}__/orders/}">
+        <form method="post" th:object="${ord}" th:action="@{/customers/} + ${customerInfo.id}">
 
           <td><input type="text" th:field="*{item}" placeholder="Item"/></td>
 
@@ -254,7 +259,7 @@
 
           <td><input type="checkbox" th:checked="*{shipped}"/></td>
 
-          <td><button type="submit">Add order</button></td>
+          <td colspan="2" scope="colgroup"><button type="submit">Add order</button></td>
 
         </form>
       </tr>

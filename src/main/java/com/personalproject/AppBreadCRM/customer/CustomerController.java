@@ -27,7 +27,7 @@ public class CustomerController {
     @GetMapping(value = "/customers/{id}")
     public ModelAndView readOneCustomer(@PathVariable long id){
         ModelAndView maw = new ModelAndView();
-        maw.setViewName("customerpage");
+        maw.setViewName("customerorderspage");
         maw.addObject("ord", new Order());
         maw.addObject("customerInfo", customerService.getCustomerById(id));
 
@@ -57,9 +57,9 @@ public class CustomerController {
         return maw;
     }
 
-    @DeleteMapping(value = "/customers")
+    @DeleteMapping(value = "/customers/{id}")
     @ResponseBody
-    public ModelAndView deleteCustomer(@ModelAttribute("id") long id){
+    public ModelAndView deleteCustomer(@PathVariable ("id") long id){
         customerService.deleteCustomer(id);
 
         ModelAndView maw = new ModelAndView();

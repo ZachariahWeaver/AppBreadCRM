@@ -51,7 +51,7 @@ public class OrderController {
         orderService.updateOrder(order);
     }
 
-    @PostMapping(value = "/customers/{customerId}/orders")
+    @PostMapping(value = "/customers/{customerId}")
     public ModelAndView createOrder(@ModelAttribute Order order, @PathVariable long customerId){
         order.setCustomer(new Customer(customerId, "", "", "", "", ""));
         orderService.createOrder(order);

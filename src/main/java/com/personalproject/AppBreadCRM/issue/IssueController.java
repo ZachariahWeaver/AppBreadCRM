@@ -43,7 +43,7 @@ public class IssueController {
     @GetMapping(value = "/customers/{customerId}/orders/{orderId}/issues/{id}")
     public ModelAndView readOneIssue(@PathVariable long id){
         ModelAndView maw = new ModelAndView();
-        maw.setViewName("issuePage");
+        maw.setViewName("issuepage");
         maw.addObject("issueInfo", issueService.getIssueById(id));
         return maw;
     }
@@ -53,7 +53,7 @@ public class IssueController {
         issueService.updateIssue(issue);
     }
 
-    @PostMapping(value = "/customers/{customerId}/orders/{orderId}/issues")
+    @PostMapping(value = "/customers/{customerId}/orders/{orderId}")
     public ModelAndView createIssue(@ModelAttribute Issue issue, @PathVariable long customerId, @PathVariable long orderId){
         issue.setOrder(new Order(orderId, customerId, "", "", false, false));
         issueService.createIssue(issue);
