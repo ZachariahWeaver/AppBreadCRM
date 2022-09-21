@@ -19,7 +19,7 @@ public class EmployeeService implements UserDetailsService {
         return employeeRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    public String signUpUser(Employee employee){
+    public void signUpUser(Employee employee){
         boolean userExists = employeeRepository.findByEmail(employee.getEmail()).isPresent();
 
         if(userExists){
@@ -30,6 +30,5 @@ public class EmployeeService implements UserDetailsService {
         employee.setPassword(encodedPassword);
 
         employeeRepository.save(employee);
-        return "works";
     }
 }

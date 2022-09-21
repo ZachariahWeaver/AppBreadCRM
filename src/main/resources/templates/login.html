@@ -1,10 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bread CRM</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="/favicon.ico" type="/image/ico">
+    <style>
+            @import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@400;700&display=swap");
+        body {
+          color: #FFFFFF;
+          margin: 0;
+          font-family: "Fira Sans Extra Condensed";
+        }
+
+        .navbar {
+          background-color: #065B05;
+          height: 40px;
+          width: 100%;
+          position: absolute;
+          top: 0;
+        }
+        .navbar .nav-data-pages {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+        .navbar .nav-data-pages li {
+          width: -webkit-fit-content;
+          width: -moz-fit-content;
+          width: fit-content;
+          float: left;
+          font-size: 16pt;
+          padding-top: 1%;
+          padding-right: 2em;
+          padding-left: 2em;
+        }
+        .navbar .nav-user-pages {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+        .navbar .nav-user-pages li {
+          width: -webkit-fit-content;
+          width: -moz-fit-content;
+          width: fit-content;
+          font-size: 16pt;
+          padding-top: 1%;
+          padding-right: 1em;
+          padding-left: 1em;
+          float: right;
+          vertical-align: middle;
+        }
+
+        .body {
+          background-color: rgba(32, 15, 15, 0.8);
+          position: absolute;
+          width: 100%;
+          top: 40px; /* Header Height */
+          bottom: 40px;
+          display: block;
+          overflow-y: auto;
+          padding-left: 20%;
+          padding-right: 20%;
+          padding-top: 4em;
+          padding-bottom: 2em;
+          box-sizing: border-box;
+        }
+        .body .subheader {
+          font-size: 4em;
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+        .body .maintext {
+          font-size: 2em;
+          margin-top: 0;
+          margin-bottom: 0;
+          padding-left: 0;
+        }
+        .itemcard{
+          background-color: #212F3C;
+          padding: 0;
+          overflow: hidden;
+        }
+        .itemcard p{
+          position: relative;
+          bottom: 0;
+          padding-left: 200px;
+        }
+        .itemcard li{
+          position: relative;
+          bottom: 0;
+        }
+        .itemcard ul{
+          margin: 0;
+          padding: 20px;
+          overflow: auto;
+
+
+        }
+
+
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 0;
+            border: 1px solid #000000;
+
+
+        }
+        tr:nth-child(even) {background-color: #36454F;}
+        tr:nth-child(odd) {background-color: ##212F3C;}
+        th{
+          background-color: #065B05;
+          color: white;
+          padding: 0;
+          border: 2px solid #000000;
+
+        }
+        table{
+            width: 100%;
+            border: 1px solid #000000;
+            border-spacing: 0;
+
+        }
+
+        .footer {
+          background-color: rgba(32, 15, 15, 0.9019607843);
+          color: #FFFFFF;
+          width: 100%;
+          height: 40px;
+          position: absolute;
+          bottom: 0;
+          display: inline-block;
+          box-sizing: border-box;
+        }
+        .footer li {
+          width: -webkit-fit-content;
+          width: -moz-fit-content;
+          width: fit-content;
+          font-size: 12pt;
+          padding-right: 1em;
+          padding-left: 1em;
+          float: left;
+        }
+        .footer p {
+          margin-top: 0;
+          margin-bottom: 0;
+          float: right;
+          width: -webkit-fit-content;
+          width: -moz-fit-content;
+          width: fit-content;
+          font-size: 10pt;
+          color: #000000;
+          padding-right: 1em;
+          padding-left: 1em;
+          float: right;
+        }
+
+        a {
+          color: #FFFFFF;
+          text-decoration: none;
+        }
+
+        ul {
+          list-style: none;
+        }
+
+        img {
+          float: left;
+        }
+        </style>
 </head>
 <body>
+<section class="header">
+    <div class="navbar">
+        <img src="/images/BreadCRMLogo.png" alt="Logo" width="40" height="40">
+
+
+        <ul class="nav-user-pages">
+            <li><a href="#"><img src="/images/UserLogo.jpg" alt="UserIcon" width="25" height="25"></a></li>
+            <li><a href="#">Username</a></li>
+        </ul>
+    </div>
+
+</section>
+<section class="body">
+    <div>
+        <table>
+        <form name="f" th:action="@{/login}" method="post">
+            <tr><th colspan="1"><h1>Enter your user credentials</h1></th></tr>
+            <tr><td><label for="username">Username</label>
+                    <input type="text" id="username" name="username"/></th></tr>
+            <tr><td><label for="password">Password</label>
+                    <input type="password" id="password" name="password"/></th></tr>
+            <tr><td><button type="submit" class="btn">Log in</button></th></tr>
+
+
+
+
+        </form>
+        </table>
+        <a href="/registration">Click here to register a new account.</a>
+
+    </div>
+</section>
+<section class="footer">
+    <div>
+        <p>Bread CRM by Zachariah Weaver 2022</p>
+    </div>
+
+</section>
 
 </body>
 </html>

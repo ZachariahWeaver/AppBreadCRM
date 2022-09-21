@@ -179,9 +179,7 @@
                 <th scope="col">Body</th>
                 <th scope="col">Author</th>
                 <th scope="col">Publish Date</th>
-                <th scope="col">Action</th>
-                <th scope="col">Delete</th>
-
+                <th scope="col">Actions</th>
             </tr>
 
 
@@ -193,12 +191,10 @@
 
                 <td>
                     <form th:action="@{/solutions/} + ${solution.id}" th:method="get">
-                        <button type="submit">Submit</button>
+                        <button type="submit">View</button>
                     </form>
-                </td>
-                <td>
                     <form th:action="@{/solutions/} + ${solution.id}" th:method="delete">
-                        <button type="submit">Submit</button>
+                        <button type="submit">Delete</button>
                     </form>
                 </td>
             </tr>

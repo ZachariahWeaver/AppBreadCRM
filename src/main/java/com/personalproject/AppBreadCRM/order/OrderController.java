@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class OrderController {
@@ -41,7 +40,8 @@ public class OrderController {
     @GetMapping(value = "/customers/{customerId}/orders/{id}")
     public ModelAndView readOneOrder(@PathVariable long id){
             ModelAndView maw = new ModelAndView();
-            maw.setViewName("orderpage");
+            maw.setViewName("orderissuespage");
+            maw.addObject("iss", new Issue());
             maw.addObject("orderInfo", orderService.getOrderById(id));
             return maw;
     }
@@ -51,7 +51,7 @@ public class OrderController {
         orderService.updateOrder(order);
     }
 
-    @PostMapping(value = "/customers/{customerId}")
+    @PostMapping(value = "/customers/{customerId}/orders")
     public ModelAndView createOrder(@ModelAttribute Order order, @PathVariable long customerId){
         order.setCustomer(new Customer(customerId, "", "", "", "", ""));
         orderService.createOrder(order);

@@ -16,12 +16,12 @@ public class RegistrationService {
         this.emailValidator = emailValidator;
     }
 
-    public String register(RegistrationRequest request) {
+    public void register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (!isValidEmail){
             throw new IllegalStateException("Email is not in correct format");
         }
-        return employeeService.signUpUser(
+        employeeService.signUpUser(
                 new Employee(
                 request.getFirstName(),
                 request.getLastName(),

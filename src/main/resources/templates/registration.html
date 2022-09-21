@@ -176,47 +176,29 @@
     <div class="navbar">
         <img src="/images/BreadCRMLogo.png" alt="Logo" width="40" height="40">
 
-        <ul class="nav-data-pages">
-            <li><a href="/customers">Customers</a></li>
-            <li><a href="/orders">Orders</a></li>
-            <li><a href="/issues"><b>Issues</b></a></li>
-            <li><a href="/solutions">Knowledge Base</a></li>
-
-        </ul>
 
         <ul class="nav-user-pages">
             <li><a href="#"><img src="/images/UserLogo.jpg" alt="UserIcon" width="25" height="25"></a></li>
             <li><a href="#">Username</a></li>
         </ul>
-        </li>
     </div>
 
 </section>
 </div>
-<section class="body">
-    <div class="container">
-        <div class="itemcard">
-            <table>
-                <form method="post" th:object="${issueInfo}" th:action="@{/customers/} + ${issueInfo.order.customer.id} + '/orders/' + ${issueInfo.order.id} + '/issues/'">
-                    <input type="hidden" th:field="*{order}"/>
-                    <input type="hidden" th:field="*{id}"/>
-                    <tr> <td colspan="2" class="infohead"><a href="#"><img src="/images/issue.png" alt="issueIcon" width="50" height="50"></a> <p th:text="*{order.item} + '\'s Issue'"/></td></tr>
-                    <tr> <td><p>Title:&nbsp</p></td> <td><input type="text" th:field="*{title}"/></td></tr>
-                    <tr> <td><p>Description:&nbsp</p></td> <td><input type="text" th:field="*{description}"/></td></tr>
-                    <tr> <td><p>Date Open:&nbsp</p></td> <td><input type="text" th:field="*{dateOpen}"/></td></tr>
-                    <tr> <td><p>Date Closed:&nbsp</p></td> <td><input type="text" th:field="*{dateClosed}"/> <button type="submit">Update Issue</button></td></tr>
-
+<section class="body"><table>
+                <form method="post" th:object="${req}" th:action="@{/registration}"></tr>
+                    <tr><th colspan="2"><h1>Enter your information below to register an account</h1></th></tr>
+                    <tr><td><p>Name:</p></td><td><input type="text" th:field="*{firstName}" placeholder="First Name"/> <input type="text" th:field="*{lastName}" placeholder="Last Name"/></td></tr>
+                    <tr><td><p>Email: </p></td><td><input type="text" th:field="*{email}" placeholder="Email"/></td></tr>
+                    <tr><td><p>Password: </p></td><td><input type="text" th:field="*{password}" placeholder="Password"/><button type="submit">Register</button></td></tr>
                 </form>
-            </table>
-        </div>
+            </th>
+        </table>
+    <a href="/login">Click here to login to an old account.</a>
     </div>
 </section>
 <section class="footer">
     <div>
-        <ul>
-            <li><a href="/">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
         <p>Bread CRM by Zachariah Weaver 2022</p>
     </div>
 

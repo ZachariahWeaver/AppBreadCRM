@@ -24,8 +24,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/registration").permitAll().anyRequest().authenticated().and().formLogin();
-
+        String [] staticResources = {
+                "/registration",
+                "/login",
+                "/images/BreadCRMLogo.png",
+                "/images/UserLogo.jpg",
+                "/favicon.ico"
+        };
+        http
+                .csrf()
+                .disable()
+                .authorizeRequests()
+                .antMatchers(staticResources)
+                .permitAll().anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/", true)
+                .loginPage("/login")
+                .permitAll();
     }
 
     @Override

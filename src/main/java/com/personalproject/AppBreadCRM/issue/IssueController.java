@@ -1,10 +1,8 @@
 package com.personalproject.AppBreadCRM.issue;
 
-import com.personalproject.AppBreadCRM.customer.Customer;
 import com.personalproject.AppBreadCRM.order.Order;
 import com.personalproject.AppBreadCRM.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,12 +46,12 @@ public class IssueController {
         return maw;
     }
 
-    @PutMapping(value = "/customers/{customerId}/orders/{orderId}/issues")
+    @PutMapping(value = "/customers/{customerId}/orders/{orderId}/issues/{id}")
     public void updateIssue(Issue issue){
         issueService.updateIssue(issue);
     }
 
-    @PostMapping(value = "/customers/{customerId}/orders/{orderId}")
+    @PostMapping(value = "/customers/{customerId}/orders/{orderId}/issues")
     public ModelAndView createIssue(@ModelAttribute Issue issue, @PathVariable long customerId, @PathVariable long orderId){
         issue.setOrder(new Order(orderId, customerId, "", "", false, false));
         issueService.createIssue(issue);

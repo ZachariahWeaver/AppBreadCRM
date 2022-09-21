@@ -1,11 +1,9 @@
 package com.personalproject.AppBreadCRM.registration;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping(path = "/registration")
-
 public class RegistrationController {
 
     private RegistrationService registrationService;
@@ -14,11 +12,16 @@ public class RegistrationController {
         this.registrationService = registrationService;
     }
     @GetMapping(value = "/registration")
-    public String registrationPage(Model model){
-        return "registration";
+    public ModelAndView registrationPage(){
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("registration");
+        maw.addObject("req", new RegistrationRequest());
+        return maw;
     }
-    @PostMapping
-    public String register(@RequestBody RegistrationRequest request){
-        return registrationService.register(request);
+
+    @PostMapping(value = "/registration")
+    public ModelAndView register(@ModelAttribute("req") RegistrationRequest request){
+        registrationService.register(request);
+        return new ModelAndView("redirect:/");
     }
 }

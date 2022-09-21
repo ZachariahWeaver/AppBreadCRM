@@ -1,13 +1,9 @@
 package com.personalproject.AppBreadCRM.customer;
 
 import com.personalproject.AppBreadCRM.order.Order;
-import net.bytebuddy.matcher.StringMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @RestController
 public class CustomerController {
@@ -18,7 +14,6 @@ public class CustomerController {
     @GetMapping(value = "/customers")
     public ModelAndView readAllCustomers(){
         ModelAndView maw = new ModelAndView();
-        Customer cust = new Customer();
         maw.setViewName("customers");
         maw.addObject("customerList", customerService.readAllCustomers());
         maw.addObject("cust", new Customer());
@@ -30,7 +25,6 @@ public class CustomerController {
         maw.setViewName("customerorderspage");
         maw.addObject("ord", new Order());
         maw.addObject("customerInfo", customerService.getCustomerById(id));
-
         return maw;
     }
 
@@ -48,7 +42,6 @@ public class CustomerController {
     @PostMapping(value = "/customers")
     public ModelAndView createCustomer(@ModelAttribute ("cust") Customer customer){
         customerService.createCustomer(customer);
-
         ModelAndView maw = new ModelAndView();
         Customer cust = new Customer();
         maw.setViewName("customers");
@@ -61,7 +54,6 @@ public class CustomerController {
     @ResponseBody
     public ModelAndView deleteCustomer(@PathVariable ("id") long id){
         customerService.deleteCustomer(id);
-
         ModelAndView maw = new ModelAndView();
         Customer cust = new Customer();
         maw.setViewName("customers");

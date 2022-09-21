@@ -123,6 +123,12 @@
             border-spacing: 0;
 
         }
+        .infohead a{
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
 
         .footer {
           background-color: rgba(32, 15, 15, 0.9019607843);
@@ -195,26 +201,17 @@
 <section class="body">
   <div class="container">
     <div class="itemcard">
-      <ul>
-        <li>
-          <a href="#"><img src="/images/UserLogo.jpg" alt="UserIcon" width="138" height="138"></a>
-        </li>
+      <table>
         <form method="post" th:object="${customerInfo}" th:action="@{/customers}">
           <input type="hidden" th:field="*{id}"/>
-          <input type="text" th:field="*{firstName}"/>
-          <input type="text" th:field="*{lastName}"/>
-          <input type="text" th:field="*{address}"/>
-          <input type="text" th:field="*{email}"/>
-          </p><input type="text" th:field="*{phoneNumber}"/>
-          <button type="submit">Update Customer</button>
+          <tr> <td colspan="2" class="infohead"><a href="#"><img src="/images/UserLogo.jpg" alt="UserIcon" width="50" height="50"></a> <p th:text="*{firstName} + ' ' + *{lastName} + '\'s Info'"/></td></tr>
+          <tr> <td><p>Name:&nbsp</p></td> <td><input type="text" th:field="*{firstName}"/><input type="text" th:field="*{lastName}"/></td></tr>
+          <tr> <td><p>Address:&nbsp</p></td> <td><input type="text" th:field="*{address}"/></td></tr>
+          <tr> <td><p>Phone Number:&nbsp</p></td> <td><input type="text" th:field="*{phoneNumber}"/></td></tr>
+          <tr> <td><p>Email Address:&nbsp</p></td> <td><input type="text" th:field="*{email}"/> <button type="submit">Update Customer</button></td></tr>
+
         </form>
-        <li>
-          <p th:text="'Name:&nbsp' + ${customerInfo.firstName} + ' ' + ${customerInfo.lastName}"></p>
-          <p th:text="'Address:&nbsp' + ${customerInfo.address}"></p>
-          <p th:text="'Phone Number:&nbsp' + ${customerInfo.phoneNumber}"></p>
-          <p th:text="'Email Address:&nbsp' + ${customerInfo.email}">
-        </li>
-      </ul>
+        </table>
     </div>
 
     <table>
@@ -238,18 +235,18 @@
         <td th:text="${order.shipped}" />
         <td>
           <form th:action="@{/customers/} + ${order.customer.id} + '/orders/' + ${order.id} + '/issues/'" th:method="get">
-            <button type="submit">Submit</button>
+            <button type="submit">View</button>
           </form>
         </td>
         <td>
           <form th:action="@{/customers/} + ${order.customer.id} + '/orders/' + ${order.id}" th:method="delete">
-            <button type="submit">Submit</button>
+            <button type="submit">Delete</button>
           </form>
         </td>
 
       </tr>
       <tr>
-        <form method="post" th:object="${ord}" th:action="@{/customers/} + ${customerInfo.id}">
+        <form method="post" th:object="${ord}" th:action="@{/customers/} + ${customerInfo.id} + '/orders'">
 
           <td><input type="text" th:field="*{item}" placeholder="Item"/></td>
 
